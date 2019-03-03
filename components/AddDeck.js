@@ -63,12 +63,12 @@ const styles = StyleSheet.create({
   button: {
     width: Dimensions.get('window').width - 30,
     backgroundColor: blue,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 15,
+    paddingBottom: 15,
     borderRadius: 10
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 25,
     color: white,
     textAlign: 'center'
   }
