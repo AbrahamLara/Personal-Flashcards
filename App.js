@@ -1,7 +1,11 @@
 import React from 'react';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { AsyncStorage, StatusBar, StyleSheet, Text, View } from 'react-native';
 import DecksList from './components/DecksList';
 import { Constants } from 'expo';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from './reducers/index';
+import { DECKS_STORAGE_KEY } from './utils/_DATA';
 
 function NativeStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -13,11 +17,15 @@ function NativeStatusBar ({ backgroundColor, ...props }) {
 
 export default class App extends React.Component {
   render() {
+    // For temporary use
+    // AsyncStorage.removeItem(DECKS_STORAGE_KEY);
     return (
-      <View>
-        <NativeStatusBar backgroundColor='#9cf' barStyle='light-content' />
-        <DecksList />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View>
+          <NativeStatusBar backgroundColor='#9cf' barStyle='light-content' />
+          <DecksList />
+        </View>
+      </Provider>
     );
   }
 }

@@ -1,3 +1,8 @@
+import { AsyncStorage } from 'react-native';
+
+export const DECKS_STORAGE_KEY = 'PersonalFlashCards:decks'
+
+// Decks dataset to start off with
 export let decks = {
   React: {
     title: 'React',
@@ -21,4 +26,15 @@ export let decks = {
       }
     ]
   }
+}
+
+function _getDummyData () {
+  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
+  return decks;
+}
+
+export function _getDecks(results) {
+  return results === null
+    ? _getDummyData()
+    : JSON.parse(results);
 }
