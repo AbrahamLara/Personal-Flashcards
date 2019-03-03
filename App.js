@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './reducers/index';
 import { DECKS_STORAGE_KEY } from './utils/_DATA';
+import { blue } from './utils/colors';
 
 function NativeStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -18,11 +19,11 @@ function NativeStatusBar ({ backgroundColor, ...props }) {
 export default class App extends React.Component {
   render() {
     // For temporary use
-    // AsyncStorage.removeItem(DECKS_STORAGE_KEY);
+    AsyncStorage.removeItem(DECKS_STORAGE_KEY);
     return (
       <Provider store={createStore(reducer)}>
         <View>
-          <NativeStatusBar backgroundColor='#9cf' barStyle='light-content' />
+          <NativeStatusBar backgroundColor={blue} barStyle='light-content' />
           <DecksList />
         </View>
       </Provider>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
 import { getDecks } from '../utils/api';
+import Deck from './Deck';
 
 class DecksList extends Component {
   // When component mounts it receives
@@ -16,20 +17,11 @@ class DecksList extends Component {
   }
 
   render() {
-    const { decks } = this.props;
-
     return (
-      <View>
-        {Object.keys(decks).map(deck => (
-          <View key={deck}>
-            <Text>{decks[deck].title}</Text>
-            {decks[deck].questions.length === 1
-              ? <Text>{decks[deck].questions.length} card</Text>
-              : <Text>{decks[deck].questions.length} cards</Text>
-            }
-          </View>
-        ))}
-      </View>
+      <FlatList
+        data={Object.keys(this.props.decks).map((key) => ({key}))}
+        renderItem={({ item }) => <Deck id={item.key} />}
+      />
     );
   }
 }
