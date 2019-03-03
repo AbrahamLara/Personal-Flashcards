@@ -7,6 +7,7 @@ import { createStore } from 'redux';
 import reducer from './reducers/index';
 import { DECKS_STORAGE_KEY } from './utils/_DATA';
 import { blue } from './utils/colors';
+import AddDeck from './components/AddDeck';
 
 function NativeStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -19,12 +20,12 @@ function NativeStatusBar ({ backgroundColor, ...props }) {
 export default class App extends React.Component {
   render() {
     // For temporary use
-    AsyncStorage.removeItem(DECKS_STORAGE_KEY);
+    // AsyncStorage.removeItem(DECKS_STORAGE_KEY);
     return (
       <Provider store={createStore(reducer)}>
-        <View>
+        <View style={{flex: 1}}>
           <NativeStatusBar backgroundColor={blue} barStyle='light-content' />
-          <DecksList />
+          <AddDeck />
         </View>
       </Provider>
     );

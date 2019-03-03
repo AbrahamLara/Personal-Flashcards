@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
 import { getDecks } from '../utils/api';
@@ -19,6 +19,7 @@ class DecksList extends Component {
   render() {
     return (
       <FlatList
+        style={{height: Dimensions.get('window').height}}
         data={Object.keys(this.props.decks).map((key) => ({key}))}
         renderItem={({ item }) => <Deck id={item.key} />}
       />
