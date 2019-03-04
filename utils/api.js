@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { _getDecks, DECKS_STORAGE_KEY } from "./_DATA";
+import { formatDeck } from './helpers';
 
 // Gets results (data) from AsyncStorage using DECKS_STORAGE_KEY
 // then fires the _Decks method which returns dummy data
@@ -11,8 +12,8 @@ export function getDecks () {
 }
 
 // Adds new deck to AsyncStorage
-export function submitEntry (deck) {
-  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck));
+export function submitEntry (title) {
+  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(formatDeck(title)));
 }
 
 // Retrieves results from AsyncStorage, gets a deck from given
