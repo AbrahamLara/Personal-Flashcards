@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { lightgray, gray } from '../utils/colors';
 
-class Deck extends Component {
-  render () {
-    const { title, questions } = this.props;
-    
-    return (
+function Deck ({ title, questions, ...rest }) {
+  return (
+    <TouchableOpacity {...rest}>
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        {questions === 1
-          ? <Text style={styles.questions}>{questions} card</Text>
-          : <Text style={styles.questions}>{questions} cards</Text>
-        }
+        <Text>
+          {questions === 1
+            ? '1 card'
+            : questions+' cards'
+          }
+        </Text>
       </View>
-    );
-  }
+    </TouchableOpacity>
+  );
 }
 
 // Retrives deck from state using given id

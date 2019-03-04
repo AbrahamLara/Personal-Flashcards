@@ -1,15 +1,20 @@
 import React from 'react';
-import { AsyncStorage, StatusBar, StyleSheet, Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { AsyncStorage, StatusBar, StyleSheet, Text, View, Platform } from 'react-native';
+import {
+  createBottomTabNavigator,
+  createStackNavigator,
+  createAppContainer
+} from 'react-navigation';
 import { Constants } from 'expo';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './reducers/index';
 import { DECKS_STORAGE_KEY } from './utils/_DATA';
-import { blue } from './utils/colors';
+import { blue, white, lightgray, gray } from './utils/colors';
 import AddDeck from './components/AddDeck';
 import DecksList from './components/DecksList';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
+import DeckView from './components/DeckView';
 
 function NativeStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -34,9 +39,49 @@ const TabsNavigator = createBottomTabNavigator({
       tabBarIcon: ({ tintColor }) => <MaterialIcons name='library-add' size={30} color={tintColor}/>
     }
   }
-});
+}, {
+  navigationOptions: {
+    headerTitle: 'Personal Flashcards',
+    headerBackTitle: 'Back',
+    headerForceInset: true,
+    headerTintColor: white,
+    headerStyle: {
+      backgroundColor: blue,
+    },
+    headerTitleStyle: {
+      fontSize: 25
+    }
+  },
+  tabBarOptions: {
+    activeTintColor: Platform.OS === 'ios' ? blue : white,
+    inactiveTintColor: Platform.OS === 'ios' ? gray : lightgray,
+    style: {
+      height: 56,
+      backgroundColor: Platform.OS === 'ios' ? white : blue,
+    }
+  }
+})
 
-const AppNavigator = createAppContainer(TabsNavigator);
+const StackNavigator = createStackNavigator({
+  Home: {
+    screen: TabsNavigator
+  },
+  DeckView: {
+    screen: DeckView,
+    navigationOptions: {
+      headerForceInset: true,
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue,
+      },
+      headerTitleStyle: {
+        fontSize: 25
+      }
+    }
+  }
+})
+
+const AppNavigator = createAppContainer(StackNavigator);
 
 export default class App extends React.Component {
   render() {

@@ -15,6 +15,11 @@ import { getDecks, removeEntry } from '../utils/api';
 import Deck from './Deck';
 
 class DecksList extends Component {
+  static navigationOptions = () => {
+    return {
+      title: 'Add Deck'
+    }
+  }
   // When component mounts it receives
   // all decks from _DATA, but is there is none
   // then it retreives fake data
@@ -25,14 +30,22 @@ class DecksList extends Component {
       .then(decks => dispatch(receiveDecks(decks)));
   }
 
+  // Removes deck from state and AsynStorage
   handleDelete (key) {
     this.props.dispatch(removeDeck(key));
     removeEntry(key);
   }
 
+  handlePress (key) {
+    this.props.navigation.navigate('DeckView', {
+      key,
+      title: this.props.decks[key].title
+    });
+  }
+
   // Displays an alert to assure the user
   // of their decision to delete a deck
-  handleLongPress (item) {
+  handleLongPress (key) {
     Alert.alert(
       'Are you sure you want to delete this deck?',
       'This action cannot be undone',
@@ -40,7 +53,7 @@ class DecksList extends Component {
         {text: 'Cancel', style: 'cancel'},
         {
           text: 'Delete',
-          onPress: () => this.handleDelete(item.key),
+          onPress: () => this.handleDelete(key),
           style: 'default'
         }
       ],
@@ -53,11 +66,11 @@ class DecksList extends Component {
   // and the Alert can be displayed
   renderItem = ({ item }) => {
     return (
-      <TouchableOpacity
-        onLongPress={() => this.handleLongPress(item)}
-      >
-        <Deck id={item.key} />
-      </TouchableOpacity>
+      <Deck
+        id={item.key}
+        onLongPress={() => this.handleLongPress(item.key)}
+        onPress={() => this.handlePress(item.key)}
+      />
     );
   }
 

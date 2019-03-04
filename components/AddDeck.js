@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  AsyncStorage
+  Platform
 } from 'react-native';
 import { blue, white } from '../utils/colors';
 import { connect } from 'react-redux';
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: blue,
     paddingTop: 15,
     paddingBottom: 15,
-    borderRadius: 10
+    borderRadius: Platform.OS === 'ios' ? 10 : 0
   },
   buttonText: {
     fontSize: 25,
