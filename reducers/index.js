@@ -18,7 +18,7 @@ export default function decks (state = {}, action) {
       const data = state;
       data[action.key] = undefined;
       delete data[action.key];
-
+      
       return {
         ...state
       };

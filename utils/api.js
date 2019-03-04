@@ -19,7 +19,7 @@ export function submitEntry (title) {
 // Retrieves results from AsyncStorage, gets a deck from given
 // key and sets its value to undefined, then removes the property
 // the object and new object is set in AsyncStorage 
-export function removeEntry(key) {
+export function removeEntry (key) {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then(results => {
       const data = JSON.parse(results);

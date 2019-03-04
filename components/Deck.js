@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { lightgray, gray } from '../utils/colors';
 
 class Deck extends Component {
-  render() {
+  render () {
     const { title, questions } = this.props;
     
     return (

@@ -33,7 +33,7 @@ function _getDummyData () {
   return decks;
 }
 
-export function _getDecks(results) {
+export function _getDecks (results) {
   return results === null
     ? _getDummyData()
     : JSON.parse(results);
