@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, SAVE_DECK, REMOVE_DECK } from "../actions";
+import { RECEIVE_DECKS, ADD_DECK, REMOVE_DECK } from "../actions";
 
 // Reducer for decks to determine what action event will
 // update state in redux store
@@ -9,7 +9,7 @@ export default function decks (state = {}, action) {
         ...state,
         ...action.decks
       };
-    case SAVE_DECK:
+    case ADD_DECK:
       return {
         ...state,
         ...action.deck

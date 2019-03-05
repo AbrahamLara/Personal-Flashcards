@@ -5,7 +5,6 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
   Alert
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';

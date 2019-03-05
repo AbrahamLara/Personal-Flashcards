@@ -1,10 +1,11 @@
-import { formatDeck } from "../utils/helpers";
+import { formatDeck, formatCard } from "../utils/helpers";
 
 // Actions events to determine how decks in state
 // will be updated.
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'; // This is before AsynStorage is used
-export const SAVE_DECK = 'SAVE_DECK';
+export const ADD_DECK = 'ADD_DECK';
 export const REMOVE_DECK = 'REMOVE_DECK';
+export const ADD_CARD = 'ADD_CARD';
 
 // This functions takes in decks to update state
 // in redux store
@@ -20,7 +21,7 @@ export function receiveDecks (decks) {
 // redux store
 function addDeck (deck) {
   return {
-    type: SAVE_DECK,
+    type: ADD_DECK,
     deck,
   }
 }
@@ -37,5 +38,19 @@ export function removeDeck (key) {
   return {
     type: REMOVE_DECK,
     key,
+  }
+}
+
+function addCardToDeck (card) {
+  return {
+    type,
+    card
+  }
+}
+
+function handleAddCardToDeck (key, question, answer) {
+  return {
+    ...addCardToDeck(formatCard(question, answer)),
+    key
   }
 }

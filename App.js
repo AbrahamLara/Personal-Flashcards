@@ -15,6 +15,7 @@ import { blue, white, lightgray, gray } from './utils/colors';
 import AddDeck from './components/AddDeck';
 import DecksList from './components/DecksList';
 import DeckView from './components/DeckView';
+import AddCard from './components/AddCard';
 
 function NativeStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -62,7 +63,7 @@ const TabsNavigator = createBottomTabNavigator({
   }
 })
 
-const StackNavigator = createStackNavigator({
+const MainNavigator = createStackNavigator({
   Home: {
     screen: TabsNavigator
   },
@@ -78,10 +79,24 @@ const StackNavigator = createStackNavigator({
         fontSize: 25
       }
     }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTitle: 'Add Card',
+      headerForceInset: true,
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue,
+      },
+      headerTitleStyle: {
+        fontSize: 25
+      }
+    }
   }
 })
 
-const AppNavigator = createAppContainer(StackNavigator);
+const AppNavigator = createAppContainer(MainNavigator);
 
 export default class App extends React.Component {
   render() {

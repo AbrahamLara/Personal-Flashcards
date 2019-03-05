@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { gray, blue, white } from '../utils/colors';
+import TextButton from './TextButton';
 
 class DeckView extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -12,6 +13,7 @@ class DeckView extends Component {
 
   render () {
     const { questions, navigation } = this.props;
+    const key = navigation.state.params.key;
     
     return (
       <View style={styles.container}>
@@ -25,16 +27,18 @@ class DeckView extends Component {
           </Text>
         </View>
         <View>
-          <TouchableOpacity style={[styles.addCardBtn, styles.button]}>
-            <Text style={[styles.btnText, { color: blue }]}>
-              Add Card
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.startQuizBtn, styles.button]}>
-            <Text style={[styles.btnText, { color: white }]}>
-              Start Quiz
-            </Text>
-          </TouchableOpacity>
+          <TextButton
+            style={[styles.addCardBtn, styles.button]}
+            onPress={() => navigation.navigate('AddCard', { key })}
+          >
+            Add Card
+          </TextButton>
+          <TextButton
+            style={[styles.startQuizBtn, styles.button]}
+            textColor={white}
+          >
+            Start Quiz
+          </TextButton>
         </View>
       </View>
     );
@@ -51,7 +55,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'stretch',
+    marginLeft: 30,
+    marginRight: 30,
   },
   headerTitle: {
     fontWeight: 'bold',
@@ -77,7 +83,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   button: {
-    width: Dimensions.get('window').width - 100,
+
     borderRadius: 5,
     paddingLeft: 30,
     paddingRight: 30,

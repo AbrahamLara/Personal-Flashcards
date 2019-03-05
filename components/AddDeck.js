@@ -4,14 +4,13 @@ import {
   TextInput,
   Text,
   StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-  Platform
+  Dimensions
 } from 'react-native';
 import { blue, white } from '../utils/colors';
 import { connect } from 'react-redux';
 import { handleAddDeck } from '../actions';
 import { submitEntry } from '../utils/api';
+import SubmitButton from './SubmitButton';
 
 class AddDeck extends Component {
   state = {
@@ -69,9 +68,10 @@ class AddDeck extends Component {
           onChangeText={this.handleText}
           value={value}
         />
-        <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
+        <SubmitButton
+          style={{borderRadius: 5}}
+          onPress={this.handleSubmit}
+        />
       </KeyboardAvoidingView>
     );
   }
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
     marginLeft: 30,
     marginRight: 30
   },
@@ -91,21 +91,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   input: {
-    width: Dimensions.get('window').width - 30,
     textAlign: 'center',
     fontSize: 30,
-  },
-  button: {
-    width: Dimensions.get('window').width - 30,
-    backgroundColor: blue,
-    paddingTop: 15,
-    paddingBottom: 15,
-    borderRadius: Platform.OS === 'ios' ? 10 : 0
-  },
-  buttonText: {
-    fontSize: 25,
-    color: white,
-    textAlign: 'center'
   }
 });
 
