@@ -26,8 +26,8 @@ function addDeck (deck) {
   }
 }
 
-// This function formats the data before
-// new deck is saved
+// This function creates a formatted deck
+// object given a title to be added to state
 export function handleAddDeck (title) {
   return addDeck(formatDeck(title));
 }
@@ -41,16 +41,20 @@ export function removeDeck (key) {
   }
 }
 
-function addCardToDeck (card) {
+// This function takes in a formatted card
+// object and the key of the deck that will
+// have the card added to its array of questions
+function addCardToDeck (key, card) {
   return {
     type,
+    key,
     card
   }
 }
 
-function handleAddCardToDeck (key, question, answer) {
-  return {
-    ...addCardToDeck(formatCard(question, answer)),
-    key
-  }
+// This functiion formats the given question
+// and answer as a card object to be added
+// as a question in the deck with the given key
+export function handleAddCardToDeck (key, question, answer) {
+  return addCardToDeck(key, formatCard(question, answer))
 }

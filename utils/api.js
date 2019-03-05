@@ -11,7 +11,7 @@ export function getDecks () {
     .then(_getDecks);
 }
 
-// Adds new deck to AsyncStorage
+// Adds a new deck to AsyncStorage
 export function submitEntry (title) {
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(formatDeck(title)));
 }

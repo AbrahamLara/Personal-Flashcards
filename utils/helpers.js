@@ -8,3 +8,12 @@ export function formatDeck (title) {
     }
   }
 }
+
+// Return an object formatted to represent
+// a question in a deck's array of questions
+export function formatCard (question, answer) {
+  return {
+    question,
+    answer
+  }
+}

@@ -16,6 +16,8 @@ class AddCard extends Component {
     answerInput: ''
   }
 
+  // As user types the value is updated
+  // and set as input value
   handleChageText = (input, value) => {
     this.setState({
       [input]: value
