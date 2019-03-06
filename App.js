@@ -16,6 +16,7 @@ import AddDeck from './components/AddDeck';
 import DecksList from './components/DecksList';
 import DeckView from './components/DeckView';
 import AddCard from './components/AddCard';
+import QuizDetails from './components/QuizDetails';
 
 function NativeStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -71,6 +72,7 @@ const MainNavigator = createStackNavigator({
     screen: DeckView,
     navigationOptions: {
       headerForceInset: true,
+      headerBackTitle: 'Back',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue,
@@ -84,6 +86,21 @@ const MainNavigator = createStackNavigator({
     screen: AddCard,
     navigationOptions: {
       headerTitle: 'Add Card',
+      headerForceInset: true,
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue,
+      },
+      headerTitleStyle: {
+        fontSize: 25
+      }
+    }
+  },
+  QuizDetails: {
+    screen: QuizDetails,
+    navigationOptions: {
+      headerTitle: 'Quiz',
+      headerBackTitle: 'Back',
       headerForceInset: true,
       headerTintColor: white,
       headerStyle: {

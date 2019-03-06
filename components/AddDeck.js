@@ -33,7 +33,7 @@ class AddDeck extends Component {
     const decks = this.props.decks;
     const value = this.state.value;
 
-    if (value && !(decks.includes(value))) {
+    if (value && !(decks.includes(value.replace(/\s+/g, '')))) {
       this.props.dispatch(handleAddDeck(value));
 
       this.setState({

@@ -38,7 +38,7 @@ class DecksList extends Component {
   handlePress (key) {
     this.props.navigation.navigate('DeckView', {
       key,
-      title: this.props.decks[key].title
+      title: this.props.decks[key].title // This can be improved
     });
   }
 

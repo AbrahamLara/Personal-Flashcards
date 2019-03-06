@@ -33,12 +33,17 @@ class DeckView extends Component {
           >
             Add Card
           </TextButton>
-          <TextButton
-            style={[styles.startQuizBtn, styles.button]}
-            textColor={white}
-          >
-            Start Quiz
-          </TextButton>
+          {questions.length !== 0 && (
+            <TextButton
+              style={[styles.startQuizBtn, styles.button]}
+              textColor={white}
+              onPress={() => {
+                this.props.navigation.navigate('QuizDetails', { questions })
+              }}
+            >
+              Start Quiz
+            </TextButton>
+          )}
         </View>
       </View>
     );

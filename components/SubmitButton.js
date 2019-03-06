@@ -6,7 +6,8 @@ import { white, blue } from '../utils/colors';
 export default function SubmitButton ({ style, ...rest }) {
   return (
     <TextButton
-      style={[styles.button, style || {}]} {...rest}
+      {...rest}
+      style={[styles.button, style || {}]}
       textColor={white}
     >
       Submit
