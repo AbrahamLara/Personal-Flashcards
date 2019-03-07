@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { gray, white, correct, incorrect } from '../utils/colors';
 import TextButton from './TextButton';
+import { clearLocalNotification, setLocalNotifiation } from '../utils/helpers';
 
 class QuizDetails extends Component{
   constructor (props) {
@@ -34,19 +35,28 @@ class QuizDetails extends Component{
   // if the user got the question wrong the question will
   // be added to an array of questions the user got wrong
   // so that the user can see the questions they need more
-  // practice on
+  // practice on. If they have answered the last question then
+  // local notification gets cleared and sets a new one for tomorrow
   handleChoice (status) {
     const questions = this.props.navigation.state.params.questions;
 
-    this.setState((currState) => ({
-      score: status === 'correct' ? currState.score+1 : currState.score,
-      currentCard: currState.currentCard+1,
-      ...questions[currState.currentCard+1],
-      view: 'question',
-      gotWrong: status === 'correct'
-        ? currState.gotWrong
-        : currState.gotWrong.concat([questions[currState.currentCard].question])
-    }));
+    this.setState((currState) => {
+      const { score, currentCard, gotWrong, length } = currState;
+      
+      if (currentCard + 1 === length) {
+        clearLocalNotification().then(() => setLocalNotifiation(1));
+      }
+        
+      return {
+        score: status === 'correct' ? score+1 : score,
+        currentCard: currentCard+1,
+        ...questions[currentCard+1],
+        view: 'question',
+        gotWrong: status === 'correct'
+          ? gotWrong
+          : gotWrong.concat([questions[currentCard].question])
+      }
+    });
   }
 
   render () {
