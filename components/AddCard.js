@@ -9,11 +9,13 @@ import {
 import { connect } from 'react-redux';
 import SubmitButton from './SubmitButton';
 import { blue } from '../utils/colors';
+import { handleAddCardToDeck } from '../actions';
+import { submitCard } from '../utils/api';
 
 class AddCard extends Component {
   state = {
-    questionInput: '',
-    answerInput: ''
+    question: '',
+    answer: ''
   }
 
   // As user types the value is updated
@@ -24,26 +26,51 @@ class AddCard extends Component {
     });
   }
 
+  handleSubmit = () => {
+    const { question, answer } = this.state;
+
+    if (question && answer) {
+      const key = this.props.navigation.state.params.key;
+
+      this.props.dispatch(handleAddCardToDeck({
+        key,
+        question,
+        answer
+      }));
+
+      this.setState({
+        question: '',
+        answer: ''
+      });
+
+      submitCard({
+        key,
+        question,
+        answer
+      });
+    }
+  }
+
   render () {
-    const { questionInput, answerInput } = this.state;
+    const { question, answer } = this.state;
 
     return (
       <KeyboardAvoidingView style={styles.center} behavior='padding'>
         <TextInput
           style={styles.input}
           placeholder='Question to add to deck'
-          onChangeText={(value) => this.handleChageText('questionInput', value)}
-          value={questionInput}
+          onChangeText={(value) => this.handleChageText('question', value)}
+          value={question}
         />
         <TextInput
           style={styles.input}
           placeholder='Answer to question'
-          onChangeText={(value) => this.handleChageText('answerInput', value)}
-          value={answerInput}
+          onChangeText={(value) => this.handleChageText('answer', value)}
+          value={answer}
         />
         <SubmitButton
           style={{borderRadius: 5}}
-          onPress={() => console.log('hello')}
+          onPress={this.handleSubmit}
         />
       </KeyboardAvoidingView>
     );

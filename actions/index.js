@@ -46,7 +46,7 @@ export function removeDeck (key) {
 // have the card added to its array of questions
 function addCardToDeck (key, card) {
   return {
-    type,
+    type: ADD_CARD,
     key,
     card
   }
@@ -55,6 +55,6 @@ function addCardToDeck (key, card) {
 // This functiion formats the given question
 // and answer as a card object to be added
 // as a question in the deck with the given key
-export function handleAddCardToDeck (key, question, answer) {
+export function handleAddCardToDeck ({ key, question, answer }) {
   return addCardToDeck(key, formatCard(question, answer))
 }
