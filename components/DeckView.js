@@ -13,7 +13,7 @@ class DeckView extends Component {
 
   render () {
     const { questions, navigation } = this.props;
-    const key = navigation.state.params.key;
+    const { title, key } = navigation.state.params;
     
     return (
       <View style={styles.container}>
@@ -38,7 +38,7 @@ class DeckView extends Component {
               style={[styles.startQuizBtn, styles.button]}
               textColor={white}
               onPress={() => {
-                this.props.navigation.navigate('QuizDetails', { questions })
+                this.props.navigation.navigate('QuizDetails', { questions, key, title })
               }}
             >
               Start Quiz

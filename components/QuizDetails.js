@@ -14,8 +14,7 @@ class QuizDetails extends Component{
       ...questions[0],
       currentCard: 0,
       view: 'question',
-      length: questions.length,
-      gotWrong: []
+      length: questions.length
     };
   }
 
@@ -51,28 +50,47 @@ class QuizDetails extends Component{
         score: status === 'correct' ? score+1 : score,
         currentCard: currentCard+1,
         ...questions[currentCard+1],
-        view: 'question',
-        gotWrong: status === 'correct'
-          ? gotWrong
-          : gotWrong.concat([questions[currentCard].question])
+        view: 'question'
       }
     });
   }
 
+  restartQuiz = () => {
+    const questions = this.props.navigation.state.params.questions;
+
+    this.setState({
+      score: 0,
+      ...questions[0],
+      currentCard: 0,
+      view: 'question'
+    });
+  }
+
   render () {
-    const { view, question, answer, score, currentCard, length, gotWrong } = this.state;
+    const { view, question, answer, score, currentCard, length } = this.state;
+    const { title, key } = this.props.navigation.state.params;
 
     if (currentCard === length) {
       return (
         <View style={styles.center}>
-          <Text style={[styles.resultsText, {fontWeight: 'bold'}]}>
+          <Text style={[styles.resultsText, { fontWeight: 'bold' }]}>
             { (100 * score / length).toFixed(0) }% correct!
           </Text>
-          <Text style={styles.resultsText}>Questions you got incorrect:</Text>
-          <View style={{marginTop: 20}}>
-            {gotWrong.map((question, i) => (
-              <Text style={{textAlign: 'center', fontSize: 20}} key={i}>{ i+1 }. { question }</Text>
-            ))}
+          <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+            <TextButton
+              onPress={this.restartQuiz}
+              style={{flex: 1}}
+            >
+              Restart Quiz
+            </TextButton>
+            <TextButton
+              onPress={() => 
+                this.props.navigation.navigate('DeckView', { title, key})
+              }
+              style={{flex: 1}}
+            >
+              Return to Deck
+            </TextButton>
           </View>
         </View>
       );
@@ -142,6 +160,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingTop: 20,
     paddingBottom: 20
+  },
+  restartBtn: {
+
   }
 });
 
