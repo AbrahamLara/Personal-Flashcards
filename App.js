@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage, StatusBar, StyleSheet, Text, View, Platform } from 'react-native';
+import { AsyncStorage, StatusBar, View, Platform } from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -17,6 +17,7 @@ import DecksList from './components/DecksList';
 import DeckView from './components/DeckView';
 import AddCard from './components/AddCard';
 import QuizDetails from './components/QuizDetails';
+import { setLocalNotifiation, clearLocalNotification } from './utils/helpers';
 
 function NativeStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -116,7 +117,10 @@ const MainNavigator = createStackNavigator({
 const AppNavigator = createAppContainer(MainNavigator);
 
 export default class App extends React.Component {
-  render() {
+  componentDidMount () {
+    setLocalNotifiation();
+  }
+  render () {
     // For temporary use
     // AsyncStorage.removeItem(DECKS_STORAGE_KEY);
     return (

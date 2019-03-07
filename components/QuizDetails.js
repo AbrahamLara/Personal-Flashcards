@@ -18,12 +18,23 @@ class QuizDetails extends Component{
     };
   }
 
+  // Switches between displaying question
+  // or answer when user decides to tap the
+  // "view question" or "view answer" button
   changeView = () => {
     this.setState((currState) => ({
       view: currState.view === 'question' ? 'answer' : 'question'
     }))
   }
 
+  // After clicking on "correct" or "incorrect"
+  // the score will be incremented by one if correct,
+  // the view will be switched to question for the next card,
+  // currentCard will be the next card in the array, and
+  // if the user got the question wrong the question will
+  // be added to an array of questions the user got wrong
+  // so that the user can see the questions they need more
+  // practice on
   handleChoice (status) {
     const questions = this.props.navigation.state.params.questions;
 
@@ -65,6 +76,7 @@ class QuizDetails extends Component{
           : <Text style={styles.cardText}>{ answer }</Text>
         }
         <TextButton
+          style={{marginBottom: 30}}
           onPress={this.changeView}
         >
           { view === 'question'
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     justifyContent: 'center',
-    // alignItems: 'stretch',
+    alignItems: 'stretch',
   },
   resultsText: {
     fontSize: 35,
