@@ -73,7 +73,7 @@ class QuizDetails extends Component{
     if (currentCard === length) {
       return (
         <View style={styles.center}>
-          <Text style={[styles.resultsText, { fontWeight: 'bold' }]}>
+          <Text style={[styles.resultsText, { fontWeight: 'bold', marginBottom: 20 }]}>
             { (100 * score / length).toFixed(0) }% correct!
           </Text>
           <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
