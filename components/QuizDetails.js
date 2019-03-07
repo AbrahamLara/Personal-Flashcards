@@ -55,6 +55,8 @@ class QuizDetails extends Component{
     });
   }
 
+  // Restarts quiz to first card in deck once user
+  // decides to restart their quiz
   restartQuiz = () => {
     const questions = this.props.navigation.state.params.questions;
 
