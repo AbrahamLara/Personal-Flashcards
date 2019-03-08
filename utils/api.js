@@ -11,7 +11,8 @@ export function getDecks () {
     .then(_getDecks);
 }
 
-// Adds a new deck to AsyncStorage
+// Adds a new deck to AsyncStorage so that they may still
+// see their neely created deck when they revisit the app
 export function submitEntry (title) {
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(formatDeck(title)));
 }
@@ -29,6 +30,10 @@ export function removeEntry (key) {
     })
 }
 
+// Once the user has successfully wrote their question and answer
+// it will be stored in AsyncStorage so the next time they open
+// the app they can still see their card existing in their specified
+// deck
 export function submitCard ({ key, question, answer }) {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then(results => {

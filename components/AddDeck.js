@@ -31,24 +31,25 @@ class AddDeck extends Component {
   // the DecksList tab
   handleSubmit = () => {
     const decks = this.props.decks;
-    const value = this.state.value;
+    const title = this.state.value;
+    const key = title.replace(/\s+/g, '');
 
-    if (value && !(decks.includes(value.replace(/\s+/g, '')))) {
-      this.props.dispatch(handleAddDeck(value));
+    if (title && !(decks.includes(key))) {
+      this.props.dispatch(handleAddDeck(title));
 
       this.setState({
         value: ''
       });
 
-      submitEntry(value);
+      submitEntry(title);
 
-      this.toHome();
+      this.toDeckView({ key, title });
     }
   }
 
   // Switched from current tab to DecksList tab
-  toHome () {
-    this.props.navigation.navigate('DecksList');
+  toDeckView ({ key, title }) {
+    this.props.navigation.navigate('DeckView', { key, title });
   }
 
   render () {
